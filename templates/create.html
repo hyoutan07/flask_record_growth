@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+<form action="/" method="post">
+    <label for="goal">目標</label>
+    <input type="text" name="goal">
+    <label for="detail">詳細</label>
+    <input type="text" name="detail">
+    <label for="achievement">達成度</label>
+    <input type="number" name="achievement">
+    <label for="today">日付</label>
+    <input type="date" name="today">
+    <input type="submit" value="Create">
+</form>
+{% endblock %}
