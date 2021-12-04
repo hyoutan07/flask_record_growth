@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h1>成長記録</h1>
+
+{% for post in posts %}
+<h2>日付: {{ post.create_at.date() }}</h2>
+<h2>目標: {{ post.goal }}</h2>
+{% endfor %}
+
+{% endblock %}

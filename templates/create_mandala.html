@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block head %}
+<form action="/create_mandala" method="post">
+    <label for="goal_main">目標</label>
+    <input type="text" name="goal_main">
+    <input type="submit" value="Create">
+</form>
+{% endblock %}
