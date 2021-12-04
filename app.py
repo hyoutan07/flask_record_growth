@@ -8,6 +8,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///record.db'
 db = SQLAlchemy(app)
 
 class Record(db.Model):
+    # テーブルの名前の設定
+    __tablename__ = "Diry_Record"
     id = db.Column(db.Integer, primary_key=True) #主キー
     goal = db.Column(db.String(50), nullable=False)
     detail = db.Column(db.String(200), nullable=False)
@@ -15,9 +17,18 @@ class Record(db.Model):
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
 
-@app.route('/')
+class Mandala(db.Model):
+    # テーブルの名前の設定
+    __tablename__ = "Mandala_Chart"
+    id = db.Column(db.Integer, primary_key=True) #主キー
+    goal_main = db.Column(db.String(50), nullable=False)
+
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template('index.html')
+    if request.method == "GET":
+        goal = Mandala.query.all()
+        return render_template("index.html", posts = goal)
+
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
@@ -37,12 +48,27 @@ def create():
         db.session.add(new_post)
         db.session.commit()
 
-        return redirect('/')
+        return redirect('/detail')
 
 @app.route('/detail')
 def read():
     posts = Record.query.order_by(Record.create_at).all()
     return render_template('detail.html', posts=posts, today=date.today())
+
+@app.route("/create_mandala", methods=["GET", "POST"])
+def create_mandala():
+    if request.method == "GET":
+        return render_template("create_mandala.html")
+    elif request.method == "POST":
+        goal_main = request.form.get("goal_main")
+
+        new_post = Mandala(goal_main = goal_main)
+
+        db.session.add(new_post)
+        db.session.commit()
+
+        return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
