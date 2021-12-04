@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///record.db'
 db = SQLAlchemy(app)
 
 class Record(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True) #主キー
     goal = db.Column(db.String(50), nullable=False)
     detail = db.Column(db.String(200), nullable=False)
     achievement = db.Column(db.Integer, nullable=True)
@@ -20,7 +20,7 @@ def index():
     if request.method == "GET":
         posts = Record.query.all()
         return render_template("index.html", posts = posts)
-        
+    
     elif request.method == "POST":
         goal = request.form.get("goal")
         detail = request.form.get("detail")
