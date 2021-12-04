@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 
 class Record(db.Model):
     # テーブルの名前の設定
-    __tablename__ = "Diry_Record"
+    __tablename__ = "Daily_Record"
     id = db.Column(db.Integer, primary_key=True) #主キー
     goal = db.Column(db.String(50), nullable=False)
     detail = db.Column(db.String(200), nullable=False)
