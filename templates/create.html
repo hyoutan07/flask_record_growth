@@ -2,15 +2,28 @@
 
 {% block body %}
 <form action="/create" method="post">
-    <label for="goal">目標</label>
+  <div class="mb-3 pb-3">
+    <label for="goal">目標　</label>
     <input type="text" name="goal">
-    <label for="detail">詳細</label>
-    <input type="text" name="detail">
+  </div>
+
+  <div class="mb-3 pb-3">
+    <label for="detail">詳細　</label>
+    <input type="text" name="detail">    
+  </div>  
+
+  <div class="mb-3 pb-3">
     <label for="achievement">達成度</label>
-    <input type="number" name="achievement">
-    <label for="create_at">日付</label>
+    <input type="number" name="achievement"> 
+  </div>  
+    
+  <div>
+    <label for="create_at">日付　</label>
     <input type="date" name="create_at" id="create_at">
-    <input type="submit" value="Create">
+  </div>
+  <br>
+  <a href="/" role="button" class="btn btn-primary">Return</a>    
+  <button type="submit" class="btn btn-outline-secondary">Create</button>
 </form>
 
 <script type="text/javascript">

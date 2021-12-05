@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
-<!-- <h1>成長記録</h1> -->
 
 {% for post in posts %}
 <h2>日付: {{ post.create_at.date() }}</h2>
 <h2>目標: {{ post.goal }}</h2>
+<a class="btn btn-outline-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>
 {% endfor %}
 
 {% endblock %}

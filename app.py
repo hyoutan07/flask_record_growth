@@ -29,7 +29,6 @@ def index():
         goal = Mandala.query.all()
         return render_template("index.html", posts = goal)
 
-
 @app.route("/create", methods=['GET', 'POST'])
 def create():
     # リクエストがGETのとき
@@ -54,6 +53,11 @@ def create():
 def read():
     posts = Record.query.order_by(Record.create_at).all()
     return render_template('detail.html', posts=posts, today=date.today())
+
+@app.route('/detail/task/<int:id>')
+def read_task(id):
+    post=Record.query.get(id)
+    return render_template("task.html", post=post)
 
 @app.route("/create_mandala", methods=["GET", "POST"])
 def create_mandala():
