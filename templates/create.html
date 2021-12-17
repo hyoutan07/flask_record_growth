@@ -3,12 +3,14 @@
 {% block body %}
 <form action="/create" method="post">
   <div class="mb-3 pb-3">
-    <label for="goal">目標　</label>
+    <label  for="goal">目標</label>
+    <label for="detail">:</label>        
     <input type="text" name="goal">
   </div>
 
   <div class="mb-3 pb-3">
-    <label for="detail">詳細　</label>
+    <label face='Times New Roman'  for="detail">詳細</label>
+    <label for="detail">:</label>    
     <input type="text" name="detail">    
   </div>  
 
@@ -18,26 +20,25 @@
   </div>  
 
   <p id="msg"></p>
-    
-  <div>
-    <label for="create_at">日付　</label>
+
+  <div class="mb-3 pb-3">
+    <label for="create_at">日付</label>
     <input type="date" name="create_at" id="create_at">
   </div>
   <br>
-  <a href="/" role="button" class="btn btn-primary">Return</a>    
-  <button type="submit" class="btn btn-outline-secondary">Create</button>
+  <a href="/" role="button" class="btn btn-primary" >Return</a>    
+  <button type="submit" class="btn btn-outline-secondary" id="btn">Create</button>
 </form>
 
 <script type="text/javascript">
 
 function inputChange(event){
-  msg.innerText =  achievement.value + ' !'; // コメントを入れられる場所
+  msg.innerText =  achievement.value + '%'; // コメントを入れられる場所
 }
 
 let slider = document.getElementById('achievement');
 achievement.addEventListener('input', inputChange);
 let msg = document.getElementById('msg');
-
 
     //今日の日時を表示
         window.onload = function () {
@@ -63,5 +64,12 @@ let msg = document.getElementById('msg');
             
             document.getElementById("create_at").value = ymd;
         }
+        
+        // 記録されたらTrueを返して、失敗したらFalseを返すなどして、
+        // それによって返すメッセージを変える
+        btn.addEventListener('click', function() {
+          window.confirm('今日もおつかれさま');
+        })
+        
 </script>
 {% endblock %}
