@@ -35,7 +35,7 @@ def create():
     if request.method == "GET":
         # posts = Record.query.all()
         return render_template("create.html")
-    
+
     else:
         goal = request.form.get("goal")
         detail = request.form.get("detail")
