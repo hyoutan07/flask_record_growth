@@ -14,8 +14,10 @@
 
   <div class="mb-3 pb-3">
     <label for="achievement">達成度</label>
-    <input type="number" name="achievement"> 
+    <input type="range" min="0" max="100" step="1" id="achievement" name="achievement"> 
   </div>  
+
+  <p id="msg"></p>
     
   <div>
     <label for="create_at">日付　</label>
@@ -27,6 +29,16 @@
 </form>
 
 <script type="text/javascript">
+
+function inputChange(event){
+  msg.innerText =  achievement.value + ' !'; // コメントを入れられる場所
+}
+
+let slider = document.getElementById('achievement');
+achievement.addEventListener('input', inputChange);
+let msg = document.getElementById('msg');
+
+
     //今日の日時を表示
         window.onload = function () {
             //今日の日時を表示
