@@ -1,3 +1,15 @@
+:root {
+  --column-color1: #9b59b6;
+  --column-color2: #3498db;
+  --column-color3: #f6e58d;
+  --column-color4: #f9ca24;
+  --column-color5: #e74c3c;
+  --column-color6: #2ecc71;
+  --column-color7: #1abc9c;
+  --column-color8: #f0932b;
+  --column-color9: #686de0;
+  --background-color: #c8d6e5;
+}
 
 body{
     max-width: 1300px;
@@ -11,67 +23,69 @@ body{
   */
   .title{
     text-align:center;
+    border: black;
+    background-color: wheat;
   }
   div[class^="column1-"] {
     border : 1px solid #c8d6e5;
-    background-color: #9b59b6;
+    background-color: var(--column-color1);
   }
   div[class^="column2-"] {
     border : 1px solid #c8d6e5;
-    background-color: #3498db;
+    background-color: var(--column-color2);
   }
   div[class^="column3-"] {
     border : 1px solid #c8d6e5;
-    background-color: #f6e58d;
+    background-color: var(--column-color3);
   }
   div[class^="column4-"] {
     border : 1px solid #c8d6e5;
-    background-color: #f9ca24;
+    background-color: var(--column-color4);
   }
   div[class^="column5-"] {
     border : 1px solid #c8d6e5;
-    background-color: #e74c3c;
+    background-color: var(--column-color5);
   }
   div[class^="column5-1"] {
-    background-color: #9b59b6;
+    background-color: var(--column-color1);
   }
   div[class^="column5-2"] {
-    background-color: #3498db;
+    background-color: var(--column-color2);
   }
   div[class^="column5-3"] {
-    background-color: #f6e58d;
+    background-color: var(--column-color3);
   }
   div[class^="column5-4"] {
-    background-color: #f9ca24;
+    background-color: var(--column-color4);
   }
   div[class^="column5-6"] {
-    background-color: #2ecc71;
+    background-color: var(--column-color6);
   }
   div[class^="column5-7"] {
-    background-color: #1abc9c;
+    background-color: var(--column-color7);
   }
   div[class^="column5-8"] {
-    background-color: #f0932b;
+    background-color: var(--column-color8);
   }
   div[class^="column5-9"] {
-    background-color: #686de0;
+    background-color: var(--column-color9);
   }
   
   div[class^="column6-"] {
     border : 1px solid #c8d6e5;
-    background-color: #2ecc71;
+    background-color: var(--column-color6);
   }
   div[class^="column7-"] {
     border : 1px solid #c8d6e5;
-    background-color: #1abc9c;
+    background-color: var(--column-color7);
   }
   div[class^="column8-"] {
     border : 1px solid #c8d6e5;
-    background-color: #f0932b;
+    background-color: var(--column-color8);
   }
   div[class^="column9-"] {
     border : 1px solid #c8d6e5;
-    background-color: #686de0;
+    background-color: var(--column-color9);
   }
   .grid-container {
     display: grid;
@@ -161,8 +175,8 @@ body{
     margin: auto;
   } 
   textarea{
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     text-align:center;
     border:none;
     font-size: 20px;
