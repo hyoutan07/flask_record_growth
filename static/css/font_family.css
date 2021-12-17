@@ -1,0 +1,16 @@
+body{
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "MS 明朝";
+  }
+
+div.mb-3 {
+    font-family: "富士ポップ";
+    font-size:15pt;
+    font-weight: bold;
+    color:rgb(8, 219, 247);
+    filter:glow(color=white, sterngth=7);
+    width: 300;
+}
+
