@@ -9,6 +9,7 @@
   --column-color8: #f0932b;
   --column-color9: #686de0;
   --background-color: #c8d6e5;
+  --border-color: red;
 }
 html{
   margin: 0;
@@ -93,6 +94,7 @@ div[class^="column9-"] {
 }
 .grid-container {
   display: grid;
+  text-align: center;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 30vh 30vh 30vh;
   grid-template-areas: "column1 column2 column3" "column4 center-column5 column6" "column7 column8 column9";
@@ -180,8 +182,8 @@ div[class^="column9-"] {
 } 
 
 textarea{
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 90%;
   text-align: center;
   border: none;
   font-size: 20px;
@@ -189,6 +191,6 @@ textarea{
 }
 
 textarea:focus {
-  border: solid 2px blue;
+  border: solid 2px var(--border-color);
   outline: 0;
 }
