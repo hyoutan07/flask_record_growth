@@ -5,7 +5,7 @@
     var textvalue = localStorage.getItem('tiltle-textarea');
 
     // fetchでの受け取り部分
-    fetch("/")
+    fetch("/create_mandala/get")
       .then(response => {
         return response.json();
       })

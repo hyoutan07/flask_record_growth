@@ -2,6 +2,8 @@ from typing import get_args
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
+from flask import jsonify
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///record.db'
@@ -73,6 +75,12 @@ def create_mandala():
 
         return redirect("/")
 
+@app.route("/create_mandala/get", methods=["GET", "POST"])
+def create_mandala_test():
+    if request.method == "GET":
+        result = {"title":"Pythonから送ったよ"}
+        print(result)
+        return jsonify(result)
 
 if __name__ == "__main__":
     app.run(debug=True)
