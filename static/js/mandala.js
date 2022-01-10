@@ -3,6 +3,20 @@
   // ブラウザに入った時起動時にlocalstrageから入れる
   window.onload = function () {
     var textvalue = localStorage.getItem('tiltle-textarea');
+
+    // fetchでの受け取り部分
+    fetch("/")
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log("失敗しました")
+      })
+
+
     //値がある場合
     if (textvalue) {
       document.getElementById('tiltle-textarea').value = textvalue;
