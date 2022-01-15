@@ -63,6 +63,20 @@ def read_task(id):
     post=Record.query.get(id)
     return render_template("task.html", post=post)
 
+@app.route('/detail/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    post = Record.query.get(id)
+    if request.method == 'GET':
+        return render_template('update.html', post=post)    
+    else:
+        post.goal = request.form.get('goal')
+        post.detail = request.form.get('detail')
+        post.create_at = datetime.strptime(request.form.get('create_at'), '%Y-%m-%d')
+
+        db.session.commit()
+        return redirect('/detail')
+
+
 @app.route("/create_mandala", methods=["GET", "POST"])
 def create_mandala():
     if request.method == "GET":
