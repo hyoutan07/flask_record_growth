@@ -2,43 +2,50 @@
 
 {% block body %}
 <form action="/create" method="post">
-  <div class="mb-3 pb-3">
-    <label  for="goal">目標</label>
-    <label for="detail">:</label>        
+  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
+    <label  for="goal">目標：
+    </label>       
     <input type="text" name="goal">
   </div>
 
-  <div class="mb-3 pb-3">
-    <label face='Times New Roman'  for="detail">詳細</label>
-    <label for="detail">:</label>    
+  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
+    <label face='Times New Roman'  for="detail">詳細：</label>  
     <input type="text" name="detail">    
   </div>  
 
-  <div class="mb-3 pb-3">
-    <label for="achievement">達成度</label>
-    <input type="range" min="0" max="100" step="1" id="achievement" name="achievement"> 
+  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
+    <label for="achievement">達成度：</label>
+    <nobr>
+    <input type="range" min="0" max="100" step="5" value="50" id="achievement" name="achievement"
+            oninput="document.getElementById('output1').value=this.value">
+    <output id="output1">50</output> 
+    <nobr>
   </div>  
 
   <p id="msg"></p>
 
-  <div class="mb-3 pb-3">
-    <label for="create_at">日付</label>
+  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
+    <label for="create_at">日付：</label>
+
     <input type="date" name="create_at" id="create_at">
   </div>
   <br>
-  <a href="/" role="button" class="btn btn-primary" >Return</a>    
-  <button type="submit" class="btn btn-outline-secondary" id="btn">Create</button>
+  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto"> 
+  <button type="submit" class="btn btn-primary" id="btn">Create</button>
+  <a href="/" role="button" class="btn btn-outline-secondary" >Return</a>     
+  </div>
 </form>
 
 <script type="text/javascript">
 
-function inputChange(event){
-  msg.innerText =  achievement.value + '%'; // コメントを入れられる場所
-}
+// function inputChange(event){
+//   msg.innerText =  achievement.value + '%'; // コメントを入れられる場所
+// }
 
-let slider = document.getElementById('achievement');
-achievement.addEventListener('input', inputChange);
-let msg = document.getElementById('msg');
+// スライダーに数字をいれる部分
+// let slider = document.getElementById('achievement');
+// achievement.addEventListener('input', inputChange);
+// let msg = document.getElementById('msg');
 
     //今日の日時を表示
         window.onload = function () {
