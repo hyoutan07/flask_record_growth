@@ -72,7 +72,7 @@
     fetch("/create_mandala/get", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json' // おまじない
       },
       body: JSON.stringify(send_data)
     })

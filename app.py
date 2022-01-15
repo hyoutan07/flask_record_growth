@@ -19,6 +19,8 @@ class Record(db.Model):
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
 
+
+# ここの内容を変更する
 class Mandala(db.Model):
     # テーブルの名前の設定
     __tablename__ = "Mandala_Chart"
@@ -75,6 +77,7 @@ def create_mandala():
 
         return redirect("/")
 
+# JSのフェッチするときに指定するURLのために、新しく用意したもの
 @app.route("/create_mandala/get", methods=["GET", "POST"])
 def create_mandala_test():
     if request.method == "GET":
