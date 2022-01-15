@@ -82,5 +82,11 @@ def create_mandala_test():
         print(result)
         return jsonify(result)
 
+    if request.method == "POST":
+        print("aaa")
+        print(request.get_json())
+        success = {"success":"成功したよ！"}
+        return jsonify(success)
+
 if __name__ == "__main__":
     app.run(debug=True)

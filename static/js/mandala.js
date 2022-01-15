@@ -6,15 +6,15 @@
 
     // fetchでの受け取り部分
     fetch("/create_mandala/get")
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log("失敗しました")
-      })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.log("失敗しました")
+    })
 
 
     //値がある場合
@@ -44,6 +44,8 @@
         localStorage.setItem(x, textareavalue);
       } 
     }
+    
+    
   }
 
   // クリア処理
@@ -57,5 +59,31 @@
         document.getElementById('column1-1-textarea').value = '';
       } 
     }
+  }
+
+  function send_test() {
+    console.log("クリック！")
+
+    const send_data = {
+      message: "JSから送ったよ！"
+    }
+    
+    // fetchで送信部分
+    fetch("/create_mandala/get", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(send_data)
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.log("失敗しました")
+    })
   }
 }
