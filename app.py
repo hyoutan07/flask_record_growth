@@ -19,6 +19,8 @@ class Record(db.Model):
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
 
+
+# ここの内容を変更する
 class Mandala(db.Model):
     # テーブルの名前の設定
     __tablename__ = "Mandala_Chart"
@@ -61,6 +63,20 @@ def read_task(id):
     post=Record.query.get(id)
     return render_template("task.html", post=post)
 
+@app.route('/detail/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    post = Record.query.get(id)
+    if request.method == 'GET':
+        return render_template('update.html', post=post)    
+    else:
+        post.goal = request.form.get('goal')
+        post.detail = request.form.get('detail')
+        post.create_at = datetime.strptime(request.form.get('create_at'), '%Y-%m-%d')
+
+        db.session.commit()
+        return redirect('/detail')
+
+
 @app.route("/create_mandala", methods=["GET", "POST"])
 def create_mandala():
     if request.method == "GET":
@@ -75,6 +91,7 @@ def create_mandala():
 
         return redirect("/")
 
+# JSのフェッチするときに指定するURLのために、新しく用意したもの
 @app.route("/create_mandala/get", methods=["GET", "POST"])
 def create_mandala_test():
     if request.method == "GET":

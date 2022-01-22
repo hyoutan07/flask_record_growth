@@ -7,6 +7,7 @@
         <h2 class="goal">{{ post.goal }}<span class="ms-3" style="font-size: 0.5em;">期限: {{ post.create_at.date()}}</span></h2>
         <p>{{ post.detail }}</p>
         <a href="/detail" role="button" class="btn btn-outline-success">Return</a>
+        <a class="btn btn-success" href="../update/{{ post.id }}" role="button" class="btn btn-outline-success">Update</a>
 
     </div>
 </div>

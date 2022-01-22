@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form class="m-5" action='/detail/update/{{ post.id }}' method="POST">
+
+    <div class="mb-3 pb-3">
+        <label  for="goal">目標</label>
+        <label for="detail">:</label>        
+        <input type="text"  class="form-control" name="goal" value="{{ post.goal }}">
+      </div>
+    
+      <div class="mb-3 pb-3">
+        <label face='Times New Roman'  for="detail">詳細</label>
+        <label for="detail">:</label>    
+        <input type="text"  class="form-control" name="detail" value="{{ post.detail }}">    
+      </div>  
+    
+      <div class="mb-3 pb-3">
+        <label for="achievement">達成度</label>
+        <input type="range" min="0" max="100" step="1" id="achievement" name="achievement" required> 
+      </div>  
+    
+      <p id="msg"></p>
+    
+      <div class="mb-3 pb-3">
+        <label for="create_at">日付</label>
+        <input type="date" name="create_at" id="create_at" required>
+      </div>
+      <br>
+      <a href="/" role="button" class="btn btn-primary" >Return</a>    
+      <button type="submit" class="btn btn-primary" >Change</button>
+    </form>
+
+
+{% endblock %}
