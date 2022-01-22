@@ -1,4 +1,5 @@
 'use script'
+
 {
   // ブラウザに入った時起動時にlocalstrageから入れる
   window.onload = function () {
@@ -15,7 +16,6 @@
     .catch(error => {
       console.log("失敗しました")
     })
-
 
     //値がある場合
     if (textvalue) {
@@ -44,9 +44,53 @@
         localStorage.setItem(x, textareavalue);
       } 
     }
-    
-    
   }
+
+  // 外側から内側に同期
+  for(let i = 1; i < 10; i++) {
+    if(i != 5) {
+        window.addEventListener('DOMContentLoaded', function(){
+          var x = "column" + String(i) + "-" + String(5) + "-textarea";
+          var text = document.getElementById(x);
+
+          text.addEventListener("input", function() {
+          var y = "column" + String(5) + "-" + String(i) + "-textarea";
+          document.getElementById(y).value = document.getElementById(x).value;
+        })
+      })
+    }
+  }
+  
+  // 内側から外側に同期
+  for(let i = 1; i < 10; i++) {
+    if(i != 5) {
+        window.addEventListener('DOMContentLoaded', function(){
+          var x = "column" + String(5) + "-" + String(i) + "-textarea";
+          var text = document.getElementById(x);
+
+          text.addEventListener("input", function() {
+          var y = "column" + String(i) + "-" + String(5) + "-textarea";
+          document.getElementById(y).value = document.getElementById(x).value;
+        })
+      })
+    }
+  }
+
+  // window.addEventListener("input", function synchronize() { 
+  //   for(let i = 0; i < 3; i++) { 
+  //     for(let j = 0; j < 3; j++) { 
+  //       var x = "column" + String(3*i+1) + "-" + String(3*j+1) + "-textarea"; 
+  //       var textareavalue = document.getElementById(x).value; 
+  //       // var textareavalue = localStorage.getItem(x);
+
+  //       if(textareavalue) { 
+  //         var y = "column" + String(i+3) + "-" + String(j+3) + "-textarea"; 
+  //         localStorage.setItem(y, textareavalue); 
+  //       }
+  //     }
+  //   }
+  // })
+
 
   // クリア処理
   function deletelocalstrage() {
@@ -60,6 +104,7 @@
       } 
     }
   }
+
 
   function send_test() {
     console.log("クリック！")
