@@ -3,11 +3,26 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
 from flask import jsonify
+import sqlite3
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///record.db'
 db = SQLAlchemy(app)
+
+conn = sqlite3.connect('sqlite:///record.db')
+cur = conn.cursor()
+
+# terminalで実行したSQL文と同じようにexecute()に書く
+cur.execute('SELECT * FROM persons')
+
+# 中身を全て取得するfetchall()を使って、printする。
+print(cur.fetchall())
+
+cur.close()
+conn.close()
+
+
 
 class Record(db.Model):
     # テーブルの名前の設定
@@ -20,18 +35,30 @@ class Record(db.Model):
     # due = db.Column(db.DateTime, nullable=False) #必須項目
 
 
+# Recordと同じようなデータ構造を定義する
 # ここの内容を変更する
 class Mandala(db.Model):
     # テーブルの名前の設定
     __tablename__ = "Mandala_Chart"
     id = db.Column(db.Integer, primary_key=True) #主キー
     goal_main = db.Column(db.String(50), nullable=False)
+    grid_11 = db.Column(db.String(50), nullable=False)
+    # grid_12 = db.Column(db.String(50), nullable=False)
+    # grid_13 = db.Column(db.String(50), nullable=False)
+    # grid_14 = db.Column(db.String(50), nullable=False)
+    # grid_15 = db.Column(db.String(50), nullable=False)
+    # grid_16 = db.Column(db.String(50), nullable=False)
+    # grid_17 = db.Column(db.String(50), nullable=False)
+    # grid_18 = db.Column(db.String(50), nullable=False)
+    # grid_19 = db.Column(db.String(50), nullable=False)
+    
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        goal = Mandala.query.all()
-        return render_template("index.html", posts = goal)
+        # goal = Mandala.query.all()
+        # return render_template("index.html", posts = goal)
+        return render_template("index.html")
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
@@ -83,8 +110,10 @@ def create_mandala():
         return render_template("create_mandala.html")
     elif request.method == "POST":
         goal_main = request.form.get("goal_main")
+        grid_11 = request.form.get("grid_11")
+        # grid_12 = request.form.get("grid_12")
 
-        new_post = Mandala(goal_main = goal_main)
+        new_post = Mandala(goal_main = goal_main, grid_11 = grid_11)
 
         db.session.add(new_post)
         db.session.commit()
@@ -101,6 +130,22 @@ def create_mandala_test():
 
     if request.method == "POST":
         print("aaa")
+    
+        # goal_main = request.form.get("goal_main")
+        # grid_11 = request.form.get("grid_11")
+
+        # new_post = Mandala(goal_main = goal_main, grid_11 = grid_11)
+
+        # db.session.add(new_post)
+        # db.session.commit()
+        send = request.get_json()
+        grid_11 = send["mandala"]
+        print(send["mandala"])
+        new_post = Mandala(goal_main = "あ", grid_11 = grid_11)
+
+        db.session.add(new_post)
+        db.session.commit()
+
         print(request.get_json())
         success = {"success":"成功したよ！"}
         return jsonify(success)

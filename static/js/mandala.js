@@ -60,7 +60,7 @@
       })
     }
   }
-  
+
   // 内側から外側に同期
   for(let i = 1; i < 10; i++) {
     if(i != 5) {
@@ -110,7 +110,8 @@
     console.log("クリック！")
 
     const send_data = {
-      message: "JSから送ったよ！"
+      message: "JSから送ったよ！",
+      mandala: document.getElementById('column1-1-textarea').value
     }
     
     // fetchで送信部分
