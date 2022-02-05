@@ -3,9 +3,9 @@
 {% block body %}
 
 {% for post in posts %}
-<h2>日付: {{ post.create_at.date() }}</h2>
-<h2>目標: {{ post.goal }}</h2>
-<a class="btn btn-outline-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>
+<h2 style="color: white;">日付: {{ post.create_at.date() }}</h2>
+<h2 style="color: white;">目標: {{ post.goal }}</h2>
+<a class="btn btn-outline-success btn-sm" href="detail/task/{{ post.id }}" role="button" style="color: white;">More</a>
 {% endfor %}
 
 {% endblock %}
