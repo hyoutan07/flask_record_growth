@@ -3,24 +3,24 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
 from flask import jsonify
-import sqlite3
+# import sqlite3
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///record.db'
 db = SQLAlchemy(app)
 
-conn = sqlite3.connect('sqlite:///record.db')
-cur = conn.cursor()
+# conn = sqlite3.connect('sqlite:///record.db')
+# cur = conn.cursor()
 
-# terminalで実行したSQL文と同じようにexecute()に書く
-cur.execute('SELECT * FROM persons')
+# # terminalで実行したSQL文と同じようにexecute()に書く
+# cur.execute('SELECT * FROM persons')
 
-# 中身を全て取得するfetchall()を使って、printする。
-print(cur.fetchall())
+# # 中身を全て取得するfetchall()を使って、printする。
+# print(cur.fetchall())
 
-cur.close()
-conn.close()
+# cur.close()
+# conn.close()
 
 
 
@@ -145,6 +145,9 @@ def create_mandala_test():
 
         db.session.add(new_post)
         db.session.commit()
+
+        test = Mandala.query.all()
+        print(test)
 
         print(request.get_json())
         success = {"success":"成功したよ！"}
