@@ -31,6 +31,8 @@ class Mandala(db.Model):
 def index():
     if request.method == "GET":
         goal = Mandala.query.all()
+        goal = Record.query.all()
+        print(goal)
         return render_template("index.html", posts = goal)
 
 @app.route("/create", methods=['GET', 'POST'])
