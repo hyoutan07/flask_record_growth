@@ -3,36 +3,36 @@
 {% block body %}
 <form action="/create" method="post">
   <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label  for="goal">目標：
+    <label  for="goal" style="color: white;">目標：
     </label>       
     <input type="text" name="goal">
   </div>
 
   <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label face='Times New Roman'  for="detail">詳細：</label>  
+    <label face='Times New Roman'  for="detail" style="color: white;">詳細：</label>  
     <input type="text" name="detail">    
   </div>  
 
   <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label for="achievement">達成度：</label>
+    <label for="achievement" style="color: white;">達成度：</label>
     <nobr>
-    <input type="range" min="0" max="100" step="5" value="50" id="achievement" name="achievement"
+    <input type="range" min="0" max="100" step="5" value="50" id="achievement" name="achievement" style="color: white;"
             oninput="document.getElementById('output1').value=this.value">
-    <output id="output1">50</output> 
+    <output id="output1" style="color: white;">50</output> 
     <nobr>
   </div>  
 
   <p id="msg"></p>
 
   <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label for="create_at">日付：</label>
+    <label for="create_at" style="color: white;">日付：</label>
 
     <input type="date" name="create_at" id="create_at">
   </div>
   <br>
   <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto"> 
   <button type="submit" class="btn btn-primary" id="btn">Create</button>
-  <a href="/" role="button" class="btn btn-outline-secondary" >Return</a>     
+  <a href="/" role="button" class="btn btn-secondary" >Return</a>     
   </div>
 </form>
 

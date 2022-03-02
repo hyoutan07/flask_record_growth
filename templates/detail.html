@@ -3,9 +3,13 @@
 {% block body %}
 
 {% for post in posts %}
-<h2>日付: {{ post.create_at.date() }}</h2>
-<h2>目標: {{ post.goal }}</h2>
-<a class="btn btn-outline-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>
+<div class="card w-50 mb-3 md-1" style="margin: auto;">
+    <div class="task_goal">
+        <h4 style="color: black;">{{ post.create_at.date() }}</h4>
+        <h2 style="color: black;">{{ post.goal }}</h2>
+        <a class="btn btn btn-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>    
+    </div>
+</div>
 {% endfor %}
 
 {% endblock %}
