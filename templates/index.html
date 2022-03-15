@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
-
 <div class="d-grid gap-2 col-6 mx-auto">
+    <h1>ユーザー名 {{ username }}</h1>
     <a href="create" role="button" class="btn btn-primary">今日の記録</a>
     <a href="detail" role="button" class="btn btn-warning">過去の軌跡</a>
     <a href="create_mandala" role="button" class="btn btn-danger">マンダラチャート</a>
+    <a href="/logout" role="button">ログアウト</a>
 </div>
 {% endblock %}
