@@ -24,7 +24,7 @@ class Record(db.Model):
     achievement = db.Column(db.Integer, nullable=True)
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 # ここの内容を変更する
 class Mandala(db.Model):
@@ -35,9 +35,10 @@ class Mandala(db.Model):
 
 # ユーザー設定
 class User(db.Model, UserMixin):
-	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(50), nullable=False, unique=True)
-	password = db.Column(db.String(25))
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(25))
+    record = db.relationship("Record", backref = "user", lazy = "joined", cascade = "delete")
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -59,7 +60,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    global username
+    global user
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
@@ -85,14 +86,15 @@ def index():
         goal = Mandala.query.all()
         goal = Record.query.all()
         print(goal)
-        return render_template("index.html", posts = goal, username = username)
+        print(user.record)
+        print(type(user.record))
+        return render_template("index.html", posts = goal, username = user.username, userrecord = user.record)
 
 @app.route("/create", methods=['GET', 'POST'])
 @login_required
 def create():
     # リクエストがGETのとき
     if request.method == "GET":
-        # posts = Record.query.all()
         return render_template("create.html")
 
     else:
@@ -102,10 +104,15 @@ def create():
         create_at = request.form.get("create_at")
         create_at = datetime.strptime(create_at, "%Y-%m-%d")
 
-        new_post = Record(goal=goal, detail=detail, achievement=achievement, create_at=create_at)
-        db.session.add(new_post)
-        db.session.commit()
+        new_record = Record(goal=goal, detail=detail, achievement=achievement, create_at=create_at)
+        goal = Record.query.all()
+        print(goal)
+        # db.session.add(new_record)
+        goal = Record.query.all()
+        print(goal)
+        user.record += [new_record]
 
+        db.session.commit()
         return redirect('/detail')
 
 @app.route('/detail')
