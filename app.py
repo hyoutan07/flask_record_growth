@@ -17,13 +17,13 @@ class Record(db.Model):
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
 
-
 # ここの内容を変更する
 class Mandala(db.Model):
     # テーブルの名前の設定
     __tablename__ = "Mandala_Chart"
     id = db.Column(db.Integer, primary_key=True) #主キー
-    # goal_main = db.Column(db.String(50), primry_key=True, nullable=True)
+    column_00 = db.Column(db.String(50),  nullable=True)
+
     column_11 = db.Column(db.String(50), nullable=True)
     column_12 = db.Column(db.String(50), nullable=True)
     column_13 = db.Column(db.String(50), nullable=True)
@@ -165,7 +165,6 @@ def update(id):
         db.session.commit()
         return redirect('/detail')
 
-
 @app.route("/create_mandala", methods=["GET", "POST"])
 def create_mandala():
     # post = Record.query.get(id)
@@ -176,109 +175,205 @@ def create_mandala():
 
         return redirect("/")
 
+
 # JSのフェッチするときに指定するURLのために、新しく用意したもの
 @app.route("/create_mandala/get", methods=["GET", "POST"])
 def create_mandala_test():
+    mandala_test = Mandala.query.get(1)
+
     if request.method == "GET":
-        result = {"title":"Pythonから送ったよ"}
+        result = {"column_00": mandala_test.column_00,
+                  "column_11": mandala_test.column_11,
+                  "column_12": mandala_test.column_12,
+                  "column_13": mandala_test.column_13,
+                  "column_14": mandala_test.column_14,
+                  "column_15": mandala_test.column_15,
+                  "column_16": mandala_test.column_16,
+                  "column_17": mandala_test.column_17,
+                  "column_18": mandala_test.column_18,
+                  "column_19": mandala_test.column_19,
+
+                  "column_21": mandala_test.column_21,
+                  "column_22": mandala_test.column_22,
+                  "column_23": mandala_test.column_23,
+                  "column_24": mandala_test.column_24,
+                  "column_25": mandala_test.column_25,
+                  "column_26": mandala_test.column_26,
+                  "column_27": mandala_test.column_27,
+                  "column_28": mandala_test.column_28,
+                  "column_29": mandala_test.column_29,   
+
+                  "column_31": mandala_test.column_31,
+                  "column_32": mandala_test.column_32,
+                  "column_33": mandala_test.column_33,
+                  "column_34": mandala_test.column_34,
+                  "column_35": mandala_test.column_35,
+                  "column_36": mandala_test.column_36,
+                  "column_37": mandala_test.column_37,
+                  "column_38": mandala_test.column_38,
+                  "column_39": mandala_test.column_39,   
+
+                  "column_41": mandala_test.column_41,
+                  "column_42": mandala_test.column_42,
+                  "column_43": mandala_test.column_43,
+                  "column_44": mandala_test.column_44,
+                  "column_45": mandala_test.column_45,
+                  "column_46": mandala_test.column_46,
+                  "column_47": mandala_test.column_47,
+                  "column_48": mandala_test.column_48,
+                  "column_49": mandala_test.column_49,   
+
+                  "column_51": mandala_test.column_51,
+                  "column_52": mandala_test.column_52,
+                  "column_53": mandala_test.column_53,
+                  "column_54": mandala_test.column_54,
+                  "column_55": mandala_test.column_55,
+                  "column_56": mandala_test.column_56,
+                  "column_57": mandala_test.column_57,
+                  "column_58": mandala_test.column_58,
+                  "column_59": mandala_test.column_59,   
+
+                  "column_61": mandala_test.column_61,
+                  "column_62": mandala_test.column_62,
+                  "column_63": mandala_test.column_63,
+                  "column_64": mandala_test.column_64,
+                  "column_65": mandala_test.column_65,
+                  "column_66": mandala_test.column_66,
+                  "column_67": mandala_test.column_67,
+                  "column_68": mandala_test.column_68,
+                  "column_69": mandala_test.column_69,   
+
+                  "column_71": mandala_test.column_71,
+                  "column_72": mandala_test.column_72,
+                  "column_73": mandala_test.column_73,
+                  "column_74": mandala_test.column_74,
+                  "column_75": mandala_test.column_75,
+                  "column_76": mandala_test.column_76,
+                  "column_77": mandala_test.column_77,
+                  "column_78": mandala_test.column_78,
+                  "column_79": mandala_test.column_79,   
+
+                  "column_81": mandala_test.column_81,
+                  "column_82": mandala_test.column_82,
+                  "column_83": mandala_test.column_83,
+                  "column_84": mandala_test.column_84,
+                  "column_85": mandala_test.column_85,
+                  "column_86": mandala_test.column_86,
+                  "column_87": mandala_test.column_87,
+                  "column_88": mandala_test.column_88,
+                  "column_89": mandala_test.column_89,
+
+                  "column_91": mandala_test.column_91,
+                  "column_92": mandala_test.column_92,
+                  "column_93": mandala_test.column_93,
+                  "column_94": mandala_test.column_94,
+                  "column_95": mandala_test.column_95,
+                  "column_96": mandala_test.column_96,
+                  "column_97": mandala_test.column_97,
+                  "column_98": mandala_test.column_98,
+                  "column_99": mandala_test.column_99,
+
+                  }
         print(result)
         return jsonify(result)
 
     if request.method == "POST":
+
         data = request.get_json()
 
-        print("aaa\n")
-        print(data["message"]),
+        mandala_test.column_00 = data["column_00"]
 
-        print(data["column_11"]),
-        print(data["column_12"]),
-        print(data["column_13"]),
-        print(data["column_14"]),
-        print(data["column_15"]),
-        print(data["column_16"]),
-        print(data["column_17"]),
-        print(data["column_18"]),
-        print(data["column_19"]),
+        mandala_test.column_11 = data["column_11"]
+        mandala_test.column_12 = data["column_12"]
+        mandala_test.column_13 = data["column_13"]
+        mandala_test.column_14 = data["column_14"]
+        mandala_test.column_15 = data["column_15"]
+        mandala_test.column_16 = data["column_16"]
+        mandala_test.column_17 = data["column_17"]
+        mandala_test.column_18 = data["column_18"]
+        mandala_test.column_19 = data["column_19"]
 
-        print(data["column_21"]),
-        print(data["column_22"]),
-        print(data["column_23"]),
-        print(data["column_24"]),
-        print(data["column_25"]),
-        print(data["column_26"]),
-        print(data["column_27"]),
-        print(data["column_28"]),
-        print(data["column_29"]),
+        mandala_test.column_21 = data["column_21"]
+        mandala_test.column_22 = data["column_22"]
+        mandala_test.column_23 = data["column_23"]
+        mandala_test.column_24 = data["column_24"]
+        mandala_test.column_25 = data["column_25"]
+        mandala_test.column_26 = data["column_26"]
+        mandala_test.column_27 = data["column_27"]
+        mandala_test.column_28 = data["column_28"]
+        mandala_test.column_29 = data["column_29"]
 
-        print(data["column_31"]),
-        print(data["column_32"]),
-        print(data["column_33"]),
-        print(data["column_34"]),
-        print(data["column_35"]),
-        print(data["column_36"]),
-        print(data["column_37"]),
-        print(data["column_38"]),
-        print(data["column_39"]),
+        mandala_test.column_31 = data["column_31"]
+        mandala_test.column_32 = data["column_32"]
+        mandala_test.column_33 = data["column_33"]
+        mandala_test.column_34 = data["column_34"]
+        mandala_test.column_35 = data["column_35"]
+        mandala_test.column_36 = data["column_36"]
+        mandala_test.column_37 = data["column_37"]
+        mandala_test.column_38 = data["column_38"]
+        mandala_test.column_39 = data["column_39"]
 
-        print(data["column_41"]),
-        print(data["column_42"]),
-        print(data["column_43"]),
-        print(data["column_44"]),
-        print(data["column_45"]),
-        print(data["column_46"]),
-        print(data["column_47"]),
-        print(data["column_48"]),
-        print(data["column_49"]),
+        mandala_test.column_41 = data["column_41"]
+        mandala_test.column_42 = data["column_42"]
+        mandala_test.column_43 = data["column_43"]
+        mandala_test.column_44 = data["column_44"]
+        mandala_test.column_45 = data["column_45"]
+        mandala_test.column_46 = data["column_46"]
+        mandala_test.column_47 = data["column_47"]
+        mandala_test.column_48 = data["column_48"]
+        mandala_test.column_49 = data["column_49"]
 
-        print(data["column_51"]),
-        print(data["column_52"]),
-        print(data["column_53"]),
-        print(data["column_54"]),
-        print(data["column_55"]),
-        print(data["column_56"]),
-        print(data["column_57"]),
-        print(data["column_58"]),
-        print(data["column_59"]),
+        mandala_test.column_51 = data["column_51"]
+        mandala_test.column_52 = data["column_52"]
+        mandala_test.column_53 = data["column_53"]
+        mandala_test.column_54 = data["column_54"]
+        mandala_test.column_55 = data["column_55"]
+        mandala_test.column_56 = data["column_56"]
+        mandala_test.column_57 = data["column_57"]
+        mandala_test.column_58 = data["column_58"]
+        mandala_test.column_59 = data["column_59"]
 
-        print(data["column_61"]),
-        print(data["column_62"]),
-        print(data["column_63"]),
-        print(data["column_64"]),
-        print(data["column_65"]),
-        print(data["column_66"]),
-        print(data["column_67"]),
-        print(data["column_68"]),
-        print(data["column_69"]),
+        mandala_test.column_61 = data["column_61"]
+        mandala_test.column_62 = data["column_62"]
+        mandala_test.column_63 = data["column_63"]
+        mandala_test.column_64 = data["column_64"]
+        mandala_test.column_65 = data["column_65"]
+        mandala_test.column_66 = data["column_66"]
+        mandala_test.column_67 = data["column_67"]
+        mandala_test.column_68 = data["column_68"]
+        mandala_test.column_69 = data["column_69"]
 
-        print(data["column_71"]),
-        print(data["column_72"]),
-        print(data["column_73"]),
-        print(data["column_74"]),
-        print(data["column_75"]),
-        print(data["column_76"]),
-        print(data["column_77"]),
-        print(data["column_78"]),
-        print(data["column_79"]),
+        mandala_test.column_71 = data["column_71"]
+        mandala_test.column_72 = data["column_72"]
+        mandala_test.column_73 = data["column_73"]
+        mandala_test.column_74 = data["column_74"]
+        mandala_test.column_75 = data["column_75"]
+        mandala_test.column_76 = data["column_76"]
+        mandala_test.column_77 = data["column_77"]
+        mandala_test.column_78 = data["column_78"]
+        mandala_test.column_79 = data["column_79"]
 
-        print(data["column_81"]),
-        print(data["column_82"]),
-        print(data["column_83"]),
-        print(data["column_84"]),
-        print(data["column_85"]),
-        print(data["column_86"]),
-        print(data["column_87"]),
-        print(data["column_88"]),
-        print(data["column_89"]),
+        mandala_test.column_81 = data["column_81"]
+        mandala_test.column_82 = data["column_82"]
+        mandala_test.column_83 = data["column_83"]
+        mandala_test.column_84 = data["column_84"]
+        mandala_test.column_85 = data["column_85"]
+        mandala_test.column_86 = data["column_86"]
+        mandala_test.column_87 = data["column_87"]
+        mandala_test.column_88 = data["column_88"]
+        mandala_test.column_89 = data["column_89"]
 
-        print(data["column_91"]),
-        print(data["column_92"]),
-        print(data["column_93"]),
-        print(data["column_94"]),
-        print(data["column_95"]),
-        print(data["column_96"]),
-        print(data["column_97"]),
-        print(data["column_98"]),
-        print(data["column_99"]),
+        mandala_test.column_91 = data["column_91"]
+        mandala_test.column_92 = data["column_92"]
+        mandala_test.column_93 = data["column_93"]
+        mandala_test.column_94 = data["column_94"]
+        mandala_test.column_95 = data["column_95"]
+        mandala_test.column_96 = data["column_96"]
+        mandala_test.column_97 = data["column_97"]
+        mandala_test.column_98 = data["column_98"]
+        mandala_test.column_99 = data["column_99"]
+
+        db.session.commit()
 
         success = {"success":"成功したよ！"}
         return jsonify(success)
