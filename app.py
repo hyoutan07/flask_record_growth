@@ -60,7 +60,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    global user
+    global username
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
@@ -82,6 +82,7 @@ def logout():
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
+    user = User.query.filter_by(username=username).first()
     if request.method == "GET":
         goal = Mandala.query.all()
         goal = Record.query.all()
@@ -93,6 +94,8 @@ def index():
 @app.route("/create", methods=['GET', 'POST'])
 @login_required
 def create():
+    user = User.query.filter_by(username=username).first()
+    print(user)
     # リクエストがGETのとき
     if request.method == "GET":
         return render_template("create.html")
@@ -105,14 +108,15 @@ def create():
         create_at = datetime.strptime(create_at, "%Y-%m-%d")
 
         new_record = Record(goal=goal, detail=detail, achievement=achievement, create_at=create_at)
-        goal = Record.query.all()
-        print(goal)
-        # db.session.add(new_record)
-        goal = Record.query.all()
-        print(goal)
-        user.record += [new_record]
+        # goal = Record.query.all()
+        # print(goal)
+        db.session.add(new_record)
+        db.session.flush()
 
+        user.record += [new_record]
+        db.session.flush()
         db.session.commit()
+        print(user.record)
         return redirect('/detail')
 
 @app.route('/detail')
