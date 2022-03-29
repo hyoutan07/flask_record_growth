@@ -116,14 +116,16 @@ def create():
         user.record += [new_record]
         db.session.flush()
         db.session.commit()
-        print(user.record)
+        print(type(user.record))
         return redirect('/detail')
 
 @app.route('/detail')
 @login_required
 def read():
-    posts = Record.query.order_by(Record.create_at).all()
-    return render_template('detail.html', posts=posts, today=date.today())
+    user = User.query.filter_by(username=username).first()
+    tmp = user.record
+    # posts = tmp.query.order_by(tmp.create_at).all()
+    return render_template('detail.html', posts=tmp, today=date.today())
 
 @app.route('/detail/task/<int:id>')
 @login_required
