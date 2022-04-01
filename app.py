@@ -33,12 +33,15 @@ class Mandala(db.Model):
     id = db.Column(db.Integer, primary_key=True) #主キー
     goal_main = db.Column(db.String(50), nullable=False)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 # ユーザー設定
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(25))
     record = db.relationship("Record", backref = "user", lazy = "joined", cascade = "delete")
+    mandala = db.relationship("Mandala", backref = "user", lazy = "joined", cascade = "delete")
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -53,6 +56,15 @@ def signup():
 
         user = User(username = username, password = generate_password_hash(password, method="sha256"))
         db.session.add(user)
+        db.session.flush()
+
+        new_mandala = Mandala(goal_main = "テスト")
+        db.session.add(new_mandala)
+        db.session.flush()
+
+        user.mandala = [new_mandala]
+        db.session.flush()
+
         db.session.commit()
         return redirect("/login")
     else:
@@ -167,6 +179,13 @@ def create_mandala():
 @app.route("/create_mandala/get", methods=["GET", "POST"])
 @login_required
 def create_mandala_test():
+    user = User.query.filter_by(username=username).first()
+    mandala = user.mandala[0]
+    mandala_test = Mandala.query.get(1)
+
+    print(mandala)
+    print(mandala_test)
+
     if request.method == "GET":
         result = {"title":"Pythonから送ったよ"}
         print(result)
@@ -177,6 +196,11 @@ def create_mandala_test():
         print(request.get_json())
         success = {"success":"成功したよ！"}
         return jsonify(success)
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect('/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
