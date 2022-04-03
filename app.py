@@ -1,3 +1,4 @@
+from email import message
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
@@ -32,24 +33,6 @@ class Record(db.Model):
     create_at = db.Column(db.DateTime, nullable=False)
     # due = db.Column(db.DateTime, nullable=False) #必須項目
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-
-# # 新しく追加した箇所
-# ENGINE = create_engine(
-#     Record,
-#     encoding = "utf-8",
-#     echo=True # Trueだと実行のたびにSQLが出力される
-# )
-# # Sessionの作成
-# session = scoped_session(
-#   # ORM実行時の設定。自動コミットするか、自動反映するなど。
-#     sessionmaker(
-#         autocommit = False,
-#         autoflush = False,
-#         bind = ENGINE
-#         )
-# )
-
 
 # ここの内容を変更する
 class Mandala(db.Model):
@@ -104,6 +87,80 @@ def logout():
     return redirect('/login')
 
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+# ユーザー設定
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(25))
+    record = db.relationship("Record", backref = "user", lazy = "joined", cascade = "delete")
+    mandala = db.relationship("Mandala", backref = "user", lazy = "joined", cascade = "delete")
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    messages = ""
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            messages += "name already exists"
+            return render_template("signup.html",messages = messages)
+
+
+        user = User(username = username, password = generate_password_hash(password, method="sha256"))
+        db.session.add(user)
+        db.session.flush()
+
+        new_mandala = Mandala(goal_main = "テスト")
+        db.session.add(new_mandala)
+        db.session.flush()
+
+        user.mandala = [new_mandala]
+        db.session.flush()
+
+        db.session.commit()
+        return redirect("/login")
+    else:
+        return render_template("signup.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    global username
+    messages = ""
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # Userテーブルからusernameに一致するユーザを取得
+        user = User.query.filter_by(username=username).first()
+        if user == None:
+            messages += "name not found"
+            return render_template("login.html",messages = messages)
+
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect('/')
+        else:
+            messages += "password is wrong"
+            return render_template("login.html",messages = messages)
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
+
+
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
@@ -122,7 +179,6 @@ def index():
 @login_required
 def create():
     user = User.query.filter_by(username=username).first()
-
     print(user)
     # リクエストがGETのとき
     if request.method == "GET":
@@ -142,7 +198,6 @@ def create():
         db.session.flush()
 
         user.record += [new_record]
-
         db.session.flush()
         db.session.commit()
         print(type(user.record))
@@ -220,6 +275,13 @@ def create_mandala():
 @app.route("/create_mandala/get", methods=["GET", "POST"])
 @login_required
 def create_mandala_test():
+    user = User.query.filter_by(username=username).first()
+    mandala = user.mandala[0]
+    mandala_test = Mandala.query.get(1)
+
+    print(mandala)
+    print(mandala_test)
+
     if request.method == "GET":
         result = {"title":"Pythonから送ったよ"}
         print(result)
@@ -230,6 +292,11 @@ def create_mandala_test():
         print(request.get_json())
         success = {"success":"成功したよ！"}
         return jsonify(success)
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect('/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
