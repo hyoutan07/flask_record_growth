@@ -1,3 +1,4 @@
+from email import message
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
@@ -50,9 +51,17 @@ def load_user(user_id):
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    messages = ""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            messages += "name already exists"
+            return render_template("signup.html",messages = messages)
+
 
         user = User(username = username, password = generate_password_hash(password, method="sha256"))
         db.session.add(user)
@@ -73,14 +82,22 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global username
+    messages = ""
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
         # Userテーブルからusernameに一致するユーザを取得
         user = User.query.filter_by(username=username).first()
+        if user == None:
+            messages += "name not found"
+            return render_template("login.html",messages = messages)
+
         if check_password_hash(user.password, password):
             login_user(user)
             return redirect('/')
+        else:
+            messages += "password is wrong"
+            return render_template("login.html",messages = messages)
     else:
         return render_template('login.html')
 

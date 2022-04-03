@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block body %}
+{% if messages != "" %}
+    <div>
+        {{ messages }}
+    </div>
+{% endif %}
 <h1>ユーザ登録</h1>
 <form method="POST">
     <label for="">ユーザ名</label>
