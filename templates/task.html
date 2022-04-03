@@ -4,8 +4,8 @@
 <h2 class="m-5" style="text-align: center; color: white;">詳細</h2>
 <div class="card w-50 mb-3" style="margin: auto;">
     <div class="task_goal">
-        <h2 class="goal">{{ post.goal }}<span class="ms-3" style="font-size: 0.5em;">期限: {{ post.create_at.date()}}</span></h2>
-        <p>{{ post.detail }}</p>
+        <h2 class="goal" style="color: black;">{{ post.goal }}<span class="ms-3" style="font-size: 0.5em; color: black;">期限: {{ post.create_at.date()}}</span></h2>
+        <p style="color: black;">{{ post.detail }}</p>
         <a href="/detail" role="button" class="btn btn-outline-success">Return</a>
         <a class="btn btn-success" href="../update/{{ post.id }}" role="button" class="btn btn-outline-success">Update</a>
     </div>
