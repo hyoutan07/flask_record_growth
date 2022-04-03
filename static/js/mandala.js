@@ -1,8 +1,9 @@
 'use script'
 {
-  // ブラウザに入った時起動時にlocalstrageから入れる
+
   window.onload = function () {
-    var textvalue = localStorage.getItem('tiltle-textarea');
+  //   // var textvalue = localStorage.getItem('tiltle-textarea');
+  //   var textvalue = json.load('tiltle-textarea');
 
     // fetchでの受け取り部分
     fetch("/create_mandala/get")
@@ -11,25 +12,40 @@
     })
     .then(data => {
       console.log(data);
+
+      document.getElementById("tiltle-textarea").value = data["column_00"]
+      for (i = 1; i < 10; ++i) {
+        for ( j = 1; j < 10; j++) {
+          var x = "column" + String(i) + "-" + String(j) + "-textarea";
+          var y = "column_" + String(i) + String(j);
+          document.getElementById(x).value = data[y];
+        }
+      }
     })
     .catch(error => {
       console.log("失敗しました")
     })
 
+  //   //値がある場合
+  //   if (textvalue) {
+  //     document.getElementById('tiltle-textarea').value = textvalue;
+  //   } else {
+  //     document.getElementById('tiltle-textarea').value = "マンダラチャートタイトル変更可能";
+  //   }
 
-    //値がある場合
-    if (textvalue) {
-      document.getElementById('tiltle-textarea').value = textvalue;
-    } else {
-      document.getElementById('tiltle-textarea').value = "マンダラチャートタイトル変更可能";
-    }
+  //   // for (let i = 1; i < 10; i++) {
+  //   //   for (let j = 1; j < 10; j++) {
+  //   //     var x = "column" + String(i) + "-" + String(j) + "-textarea";
+  //   //     document.getElementById(x).value = localStorage.getItem(x);
+  //   //   } 
+  //   // }
 
-    for (let i = 1; i < 10; i++) {
-      for (let j = 1; j < 10; j++) {
-        var x = "column" + String(i) + "-" + String(j) + "-textarea";
-        document.getElementById(x).value = localStorage.getItem(x);
-      } 
-    }
+  //   for (let i = 1; i < 10; i++) {
+  //     for (let j = 1; j < 10; j++) {
+  //       var x = "column" + String(i) + "-" + String(j) + "-textarea";
+  //       document.getElementById(x).value = json.load(x);
+  //     }
+  //   }
   }
 
   // ブラウザから出た時に保存
@@ -95,6 +111,8 @@
 
     const send_data = {
       message: "JSから送ったよ！",
+      column_00: document.getElementById("tiltle-textarea").value,
+
       column_11: document.getElementById("column1-1-textarea").value,
       column_12: document.getElementById("column1-2-textarea").value,
       column_13: document.getElementById("column1-3-textarea").value,
