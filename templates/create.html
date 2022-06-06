@@ -1,41 +1,43 @@
 {% extends "base.html" %}
 
 {% block body %}
-<form action="/create" method="post">
-  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label  for="goal" style="color: white;">目標：
-    </label>       
-    <input type="text" name="goal">
+<div class="card mx-auto" style="color: black; width: 70%; max-width: 800px;">
+  <h5 class="card-header" style="padding: 10px;">今日の記録</h5>
+  <div class="card-body" style="padding: 25px; padding-bottom: 0px;">
+    <form action="/create" method="post">
+    <div class="mb-3 pb-3 d-grid gap-2 col mx-auto">
+      <label face='Times New Roman' for="goal">目標</label>    
+      <input type="text" name="goal">
+    </div>
+
+      <div class="mb-3 pb-3 d-grid gap-2 col mx-auto">
+        <label face='Times New Roman'  for="detail">詳細</label>  
+        <input type="text" name="detail">    
+      </div>  
+
+      <div class="mb-3 pb-3 d-grid gap-2 col mx-auto">
+        <label for="achievement">達成度</label>
+        <nobr>
+        <input type="range" min="0" max="100" step="5" value="50" id="achievement" name="achievement" 
+                oninput="document.getElementById('output1').value=this.value">
+        <output id="output1" >50</output> 
+        <nobr>
+      </div>  
+
+      <p id="msg"></p>
+
+      <div class="mb-3 pb-3 d-grid gap-2 col mx-auto">
+        <label for="create_at">日付</label>
+        <input type="date" name="create_at" id="create_at">
+      </div>
+      <br>
+      <div class="mb-3 pb-3 d-grid gap-2 col mx-auto"> 
+      <button type="submit" class="btn btn-primary" id="btn">Create</button>
+      <a href="/" role="button" class="btn btn-secondary" >Return</a>     
+      </div>
+    </form>
+    </div>
   </div>
-
-  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label face='Times New Roman'  for="detail" style="color: white;">詳細：</label>  
-    <input type="text" name="detail">    
-  </div>  
-
-  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label for="achievement" style="color: white;">達成度：</label>
-    <nobr>
-    <input type="range" min="0" max="100" step="5" value="50" id="achievement" name="achievement" style="color: white;"
-            oninput="document.getElementById('output1').value=this.value">
-    <output id="output1" style="color: white;">50</output> 
-    <nobr>
-  </div>  
-
-  <p id="msg"></p>
-
-  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto">
-    <label for="create_at" style="color: white;">日付：</label>
-
-    <input type="date" name="create_at" id="create_at">
-  </div>
-  <br>
-  <div class="mb-3 pb-3 d-grid gap-2 col-6 mx-auto"> 
-  <button type="submit" class="btn btn-primary" id="btn">Create</button>
-  <a href="/" role="button" class="btn btn-secondary" >Return</a>     
-  </div>
-</form>
-
 <script type="text/javascript">
 
 // function inputChange(event){

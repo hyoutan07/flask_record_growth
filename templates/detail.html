@@ -4,10 +4,16 @@
 
 {% for post in posts %}
 <div class="card w-50 mb-3 md-1" style="margin: auto;">
+    <h5 class="card-header" style="padding: 10px; color: black;">{{ post.create_at.date() }}</h5>
     <div class="task_goal">
-        <h4 style="color: black;">{{ post.create_at.date() }}</h4>
-        <h2 style="color: black;">{{ post.goal }}</h2>
-        <a class="btn btn btn-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>    
+        <div class="d-flex bd-highlight mb-1">
+            <div class="p-2 bd-highlight">
+                <h3 style="color: black; margin: 5px;">{{ post.goal }}</h3>
+            </div>
+            <div class="ms-auto p-2 bd-highlight">
+                <a class="btn btn btn-success btn-sm" href="detail/task/{{ post.id }}" role="button">More</a>
+            </div>
+        </div> 
     </div>
 </div>
 {% endfor %}
