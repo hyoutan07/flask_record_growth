@@ -1,12 +1,52 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="d-grid gap-2 col-6 mx-auto">
-    <h1>ユーザー名 {{ username }}</h1>
-    <h1>user.record {{ userrecord }}</h1>
-    <a href="create" role="button" class="btn btn-primary">今日の記録</a>
-    <a href="detail" role="button" class="btn btn-warning">過去の軌跡</a>
-    <a href="create_mandala" role="button" class="btn btn-danger">マンダラチャート</a>
-    <a href="/logout" role="button">ログアウト</a>
+<div id="navArea">
+  <nav>
+    <div class="inner">
+      <ul>
+        <li><a href="#">Username: {{ username }}</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="mask"></div>
+
 </div>
+
+<div class="flex">
+    <a href="create" class="btn btn-c btn--green btn--cubic" role="button">
+        <i class="fa fas fa-envelope"></i>
+        Today's Record
+    </a>
+    <a href="detail" class="btn btn-c btn--blue btn--cubic" role="button">
+        <i class="fa fas fa-envelope"></i>
+        Your History
+    </a>
+    <a href="create_mandala" class="btn btn-c btn--yellow btn--cubic" role="button">
+        <i class="fa fas fa-envelope"></i>
+        Mandala Chart
+    </a>
+</div>
+
+<!-- <div class="card.color-black-50" style="position: absolute; right: 0px; top: 0px">
+    <div class="user_name">
+        <a class="btn btn-n btn--name btn--cubic" >Username: {{ username }}
+        <i class="fa fas fa-envelope"></i>
+        </a>
+        <a href="/logout" role="button" class="btn btn-d btn--default btn--cubic">Logout 
+        <i class="fa fas fa-envelope"></i>
+        </a>
+    </div>
+</div>  -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="../static/js/burger.js"></script>
 {% endblock %}
