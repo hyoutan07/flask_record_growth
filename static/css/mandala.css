@@ -25,6 +25,7 @@ body{
 
 #mandala_main {
   max-width: 1300px;
+  height: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -36,72 +37,93 @@ body * {
 .title{
   text-align:center;
   border: black;
-  background-color: white;
 }
 div[class^="column1-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color1);
 }
 div[class^="column2-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color2);
 }
 div[class^="column3-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color3);
 }
 div[class^="column4-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color4);
 }
 div[class^="column5-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color5);
 }
 div[class^="column5-1"] {
+  border-radius: 3px;
   background-color: var(--column-color1);
 }
 div[class^="column5-2"] {
+  border-radius: 3px;
   background-color: var(--column-color2);
 }
 div[class^="column5-3"] {
+  border-radius: 3px;
   background-color: var(--column-color3);
 }
 div[class^="column5-4"] {
+  border-radius: 3px;
   background-color: var(--column-color4);
 }
 div[class^="column5-6"] {
+  border-radius: 3px;
   background-color: var(--column-color6);
 }
 div[class^="column5-7"] {
+  border-radius: 3px;
   background-color: var(--column-color7);
 }
 div[class^="column5-8"] {
+  border-radius: 3px;
   background-color: var(--column-color8);
 }
 div[class^="column5-9"] {
+  border-radius: 3px;
   background-color: var(--column-color9);
 }
 
 div[class^="column6-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color6);
 }
 div[class^="column7-"] {
+  border-radius: 3px;
   border : 1px solid #c8d6e5;
   background-color: var(--column-color7);
 }
 div[class^="column8-"] {
   border : 1px solid #c8d6e5;
+  border-radius: 3px;
   background-color: var(--column-color8);
 }
 div[class^="column9-"] {
+  border-radius: 3px;
   border : 1px solid #c8d6e5;
   background-color: var(--column-color9);
 }
+
 .grid-container {
   display: grid;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  grid-gap: 5px 10px;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 30vh 30vh 30vh;
   grid-template-areas: "column1 column2 column3" "column4 center-column5 column6" "column7 column8 column9";
@@ -110,6 +132,8 @@ div[class^="column9-"] {
 .column1 {
   grid-area: column1;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column1-1 column1-2 column1-3" "column1-4 column1-5 column1-6" "column1-7 column1-8 column1-9";
@@ -119,6 +143,8 @@ div[class^="column9-"] {
 .column2 {
   grid-area: column2;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column2-1 column2-2 column2-3" "column2-4 column2-5 column2-6" "column2-7 column2-8 column2-9";
@@ -128,6 +154,8 @@ div[class^="column9-"] {
 .column3 {
   grid-area: column3;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column3-1 column3-2 column3-3" "column3-4 column3-5 column3-6" "column3-7 column3-8 column3-9";
@@ -137,6 +165,8 @@ div[class^="column9-"] {
 .column4 {
   grid-area: column4;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column4-1 column4-2 column4-3" "column4-4 column4-5 column4-6" "column4-7 column4-8 column4-9";
@@ -146,6 +176,8 @@ div[class^="column9-"] {
 .center-column5 { 
   grid-area: center-column5;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column5-1 column5-2 column5-3" "column5-4 column5-5 column5-6" "column5-7 column5-8 column5-9";
@@ -155,6 +187,8 @@ div[class^="column9-"] {
 .column6 {
   grid-area: column6;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column6-1 column6-2 column6-3" "column6-4 column6-5 column6-6" "column6-7 column6-8 column6-9";
@@ -164,6 +198,8 @@ div[class^="column9-"] {
 .column7 {
   grid-area: column7;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column7-1 column7-2 column7-3" "column7-4 column7-5 column7-6" "column7-7 column7-8 column7-9";
@@ -173,6 +209,8 @@ div[class^="column9-"] {
 .column8 {
   grid-area: column8;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column8-1 column8-2 column8-3" "column8-4 column8-5 column8-6" "column8-7 column8-8 column8-9";
@@ -182,6 +220,8 @@ div[class^="column9-"] {
 .column9 {
   grid-area: column9;
   display: grid;
+  border-radius: 3px;
+  grid-gap: 2px 2px;
   grid-auto-columns: 33%;
   grid-auto-rows: 9.5vh;
   grid-template-areas: "column9-1 column9-2 column9-3" "column9-4 column9-5 column9-6" "column9-7 column9-8 column9-9";
@@ -193,14 +233,17 @@ textarea{
   height: 100%;
   text-align: center;
   border: none;
+  border-radius: 3px;
   font-size: 20px;
   background-color: transparent;
+  /* 右下の//(サイズ変更機能)を消す */
+  resize: none;
 }
 
 
-textarea:focus{
-  /* box-shadow: 0 0 5px #FF2626; */
-  border: 1px solid #FF2626;
+textarea:focus {
+  outline: none;
+  border-color: #000;
 }
 
 textarea.resizenone{
