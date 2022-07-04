@@ -237,7 +237,7 @@ def create():
         db.session.flush()
         db.session.commit()
         print(type(user.record))
-        return redirect('/detail', username = user.username)
+        return redirect('/detail')
 
 
 @app.route('/detail')
