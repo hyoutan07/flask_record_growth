@@ -43,7 +43,6 @@ class Mandala(db.Model):
     column_18 = db.Column(db.String(50), nullable=True)
     column_19 = db.Column(db.String(50), nullable=True)
 
-
     column_21 = db.Column(db.String(50), nullable=True)
     column_22 = db.Column(db.String(50), nullable=True)
     column_23 = db.Column(db.String(50), nullable=True)
@@ -219,7 +218,7 @@ def create():
     print(user)
     # リクエストがGETのとき
     if request.method == "GET":
-        return render_template("create.html")
+        return render_template("create.html", username = user.username)
 
     else:
         goal = request.form.get("goal")
@@ -238,7 +237,7 @@ def create():
         db.session.flush()
         db.session.commit()
         print(type(user.record))
-        return redirect('/detail')
+        return redirect('/detail', username = user.username)
 
 
 @app.route('/detail')
@@ -254,7 +253,7 @@ def read():
                 posts[j].create_at,  posts[j-1].create_at = posts[j-1].create_at, posts[j].create_at
     
 
-    return render_template('detail.html', posts=posts, today=date.today())
+    return render_template('detail.html', posts=posts, today=date.today(), username = user.username)
 
 
 @app.route('/detail/task/<int:id>')
@@ -270,7 +269,7 @@ def read_task(id):
             if posts[j].create_at > posts[j-1].create_at:
                 posts[j].create_at,  posts[j-1].create_at = posts[j-1].create_at, posts[j].create_at
 
-    return render_template("task.html", post=post, posts=posts)
+    return render_template("task.html", post=post, posts=posts, username = user.username)
 
 @app.route('/detail/update/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -294,7 +293,7 @@ def update(id):
 @login_required
 def create_mandala():
     if request.method == "GET":
-        return render_template("create_mandala.html")
+        return render_template("create_mandala.html", username = username)
 
 
 

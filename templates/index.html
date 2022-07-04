@@ -1,25 +1,6 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div id="navArea">
-  <nav>
-    <div class="inner">
-      <ul>
-        <li><a href="#">Username: {{ username }}</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  
-  <div class="toggle_btn">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <div id="mask"></div>
-
-</div>
 
 <div class="flex">
     <a href="create" class="btn btn-c btn--green btn--cubic" role="button">
@@ -36,17 +17,4 @@
     </a>
 </div>
 
-<!-- <div class="card.color-black-50" style="position: absolute; right: 0px; top: 0px">
-    <div class="user_name">
-        <a class="btn btn-n btn--name btn--cubic" >Username: {{ username }}
-        <i class="fa fas fa-envelope"></i>
-        </a>
-        <a href="/logout" role="button" class="btn btn-d btn--default btn--cubic">Logout 
-        <i class="fa fas fa-envelope"></i>
-        </a>
-    </div>
-</div>  -->
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="../static/js/burger.js"></script>
 {% endblock %}
